@@ -4,23 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
+    private List<LineItem> lineItems = new ArrayList<>();
 
-    private List<Product> products = new ArrayList<>();
+    public void addLineItem(LineItem lineItem) {
+        lineItems.add(lineItem);
+    }
 
-    public void addProduct(Product product) {
-        products.add(product);
+    public List<LineItem> getLineItems() {
+        return new ArrayList<>(lineItems);
     }
 
     public int getTotalCost() {
-        return products.stream()
-                .mapToInt(Product::getPrice)
+        return lineItems.stream()
+                .mapToInt(LineItem::getPrice)
                 .sum();
     }
 
     @Override
     public String toString() {
         return "ShoppingCart{" +
-                "products=" + products +
+                "lineItems=" + lineItems +
                 '}';
     }
 }
