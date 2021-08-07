@@ -2,8 +2,8 @@ package com.pluralsight.javaFundamentals;
 
 public class NonprofitCustomer extends Customer {
 
-    public NonprofitCustomer(String name, long ccNumber) {
-        super(name, ccNumber);
+    public NonprofitCustomer(String name) {
+        super(name);
     }
 
     @Override

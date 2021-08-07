@@ -1,37 +1,44 @@
 package com.pluralsight.javaFundamentals;
 
-public abstract class Product {
-
-    private final String name;
-    private final int price;
+public abstract class Product implements Comparable<Product> {
+    private String name;
+    private int basePrice;
     private int productDiscount;
 
-    public Product(String name, int price) {
+    public Product(String name, int basePrice) {
         this.name = name;
-        this.price = price;
+        this.basePrice = basePrice;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getPrice() {
-        int shippingCost = calculateShippingCost();
-        return Math.round((1 - productDiscount) * price) + shippingCost;
+    public int getBasePrice() {
+        return basePrice;
     }
 
-    public void setProductDiscount(int productDiscount) {
-        this.productDiscount = productDiscount;
+    @Override
+    public int compareTo(Product otherProduct) {
+        return name.compareTo(otherProduct.name);
     }
+
+    public void setDiscount(int discount) {
+        this.productDiscount = discount;
+    }
+
+    public int getProductDiscount() {
+        return productDiscount;
+    }
+
+    public abstract PriceCalculator createPriceCalculator();
 
     @Override
     public String toString() {
         return "Product{" +
               "name='" + name + '\'' +
-              ", price=" + price +
+              ", price=" + basePrice +
               ", discount=" + productDiscount +
               '}';
     }
-
-    public abstract int calculateShippingCost();
 }

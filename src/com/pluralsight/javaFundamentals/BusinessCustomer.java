@@ -4,20 +4,25 @@ public class BusinessCustomer extends Customer {
 
     public enum BusinessSize {SMALL, MEDIUM, LARGE}
 
-    private final BusinessSize size;
+    private BusinessSize size;
 
-    public BusinessCustomer(String name, long ccNumber, BusinessSize size) {
-        super(name, ccNumber);
+    public BusinessCustomer(String name, BusinessSize size) {
+        super(name);
         this.size = size;
     }
 
     @Override
     public int calculateDiscount() {
-        return switch (size) {
-            case SMALL -> 5;
-            case MEDIUM -> 10;
-            case LARGE -> 20;
-        };
+        switch (size) {
+            case SMALL:
+                return 5;
+            case MEDIUM:
+                return 10;
+            case LARGE:
+                return 20;
+            default:
+                throw new AssertionError("Unknown size: " + this);
+        }
     }
 
     @Override
